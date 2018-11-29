@@ -1,0 +1,6 @@
+"projets": [
+	{
+		"projet": "spring-boot-hello-world",
+		"git_url": "remote.origin.url	https://gitlab.gologic.ca/gologic-technos/spring-boot-hello-world.git"
+	}
+] 

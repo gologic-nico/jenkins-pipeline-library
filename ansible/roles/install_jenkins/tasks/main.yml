@@ -1,0 +1,85 @@
+---
+- name: Install wget
+  yum:
+    name: wget
+    state: present
+
+- name: Install openjdk
+  yum:
+    name: java-1.8.0-openjdk
+    state: present
+
+- name: Download jenkins.repo
+  get_url:
+    url: http://pkg.jenkins-ci.org/redhat-stable/jenkins.repo
+    dest: /etc/yum.repos.d/jenkins.repo
+
+- name: Import jenkins key
+  rpm_key:
+    state: present
+    key: https://jenkins-ci.org/redhat/jenkins-ci.org.key
+
+- name: Install jenkins
+  yum:
+    name: jenkins
+    state: present
+
+- name: Clone jenkins-pipeline-library
+  git:
+    repo: https://github.com/gologic-nico/jenkins-pipeline-library.git
+    dest: /var/lib/jenkins/jenkins-pipeline-library
+    force: yes
+
+- name: Create init.groovy link to JENKINS_HOME
+  file:
+    src: /var/lib/jenkins/jenkins-pipeline-library/init.groovy
+    dest: /var/lib/jenkins/init.groovy
+    owner: jenkins
+    group: jenkins
+    mode: u+rwx
+    state: link
+
+- name: Set execution on init.groovy
+  file:
+    path: /var/lib/jenkins/jenkins-pipeline-library/init.groovy
+    mode: 0777
+
+- name: Restarted Jenkins
+  systemd:
+    name: jenkins
+    state: restarted
+    enabled: true
+
+- name: Add firewalld rule port 8080
+  firewalld:
+    port: 8080/tcp
+    permanent: true
+    state: enabled
+
+- name: Restarted firewalld
+  service:
+    name: firewalld 
+    state: restarted
+    
+- name: Add docker-ce repo
+  get_url:
+    url: https://download.docker.com/linux/centos/docker-ce.repo
+    dest: /etc/yum.repos.d/docker-ce.repo
+
+- name: Install docker-ce
+  package:
+    name: docker-ce
+    state: latest
+
+- name: Add user jenkins to docker group
+  user:
+    name: jenkins
+    group: docker
+
+- name: Start docker
+  systemd:
+    name: docker
+    state: started
+
+- name: Show init password jenkins
+  shell: cat /var/lib/jenkins/secrets/initialAdminPassword
