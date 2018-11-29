@@ -89,9 +89,9 @@
     name: docker
     state: started
 
-- name: Pause 3 minutes ...
+- name: Pause 1 minutes ...
   pause:
-    minutes: 3
+    minutes: 1
 
 - name: Restarted Jenkins
   systemd:
@@ -99,9 +99,9 @@
     state: restarted
     enabled: true
 
-- name: Pause 1 minutes ...
+- name: Pause 2 minutes ...
   pause:
-    minutes: 1
+    minutes: 2
     
 - name: Restarted Jenkins
   systemd:

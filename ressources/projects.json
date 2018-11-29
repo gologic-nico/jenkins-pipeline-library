@@ -3,6 +3,10 @@
 		{
 			"name": "spring-boot-hello-world",
 			"gitUrl": "https://github.com/gologic-nico/spring-boot-hello-world.git"
-		}
+		},
+		{
+            "name": "spring-boot-hello-world-encore-une-fois",
+            "gitUrl": "https://github.com/gologic-nico/spring-boot-hello-world.git"
+        }
 	]
 }

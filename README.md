@@ -18,10 +18,6 @@ Différents outils seront mis à contribution tel que :
 ### Connectez vous en ssh avec le user root
 `ssh root@IpAddress`
 
-### Ajouter le repo du package de Ansible
-
-`yum install epel-release`
-
 ### Installer le package Ansible
 
 `yum install ansible`
