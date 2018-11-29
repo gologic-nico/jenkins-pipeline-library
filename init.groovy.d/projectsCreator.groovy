@@ -71,7 +71,7 @@ new XmlNodePrinter(new PrintWriter(stringWriter)).print(settingsXmlFile)
 
 println "Valeur du fichier : " + stringWriter.toString()
 
-org.jenkinsci.plugins.configfiles.maven.MavenSettingsConfig mavenSettingsConfig = new org.jenkinsci.plugins.configfiles.maven.MavenSettingsConfig("nexus-settings", "nexus-settings", "", stringWriter.toString(), null, null);
+org.jenkinsci.plugins.configfiles.maven.MavenSettingsConfig mavenSettingsConfig = new org.jenkinsci.plugins.configfiles.maven.MavenSettingsConfig("maven-settings", "maven-settings", "", stringWriter.toString(), null, null);
 globalConfigFileStore.save(mavenSettingsConfig)
 
 JENKINS.save()

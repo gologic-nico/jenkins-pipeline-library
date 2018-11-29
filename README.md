@@ -10,7 +10,7 @@ Différents outils seront mis à contribution tel que :
 * [Projet spring-boot-hello-world](https://github.com/gologic-nico/spring-boot-hello-world.git)
 
 ## Requis
-* VM CentOs 7 avec la base d'environnement "Infrastructure Server"
+* VM CentOs 7 vanille avec la base d'environnement "Infrastructure Server"
 * Accès root
 
 ## Étape à suivre
