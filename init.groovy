@@ -1,6 +1,5 @@
 import jenkins.model.*
 import jenkins.install.*
-import javaposse.jobdsl.plugin.ExecuteDslScripts
 import hudson.util.*
 import hudson.model.UpdateSite
 import hudson.model.TopLevelItem
@@ -10,9 +9,6 @@ import hudson.security.*
 import hudson.model.labels.LabelAtom
 import hudson.tasks.LogRotator
 import hudson.triggers.SCMTrigger
-import hudson.plugins.git.BranchSpec
-import hudson.plugins.git.extensions.GitSCMExtension
-import hudson.plugins.git.GitSCM
 
 String PIPELINE_LIB_ID = "PIPELIB"
 String PIPELINE_DEFAULT_BRANCH = "master"
@@ -112,12 +108,12 @@ if(dslGeneratorJob == null){
 	scmTrigger.start(dslGeneratorJob, true)
 	dslGeneratorJob.addTrigger(scmTrigger)
 	
-	List<BranchSpec> branches = [
-		new BranchSpec(PIPELINE_DEFAULT_BRANCH)
+	List<hudson.plugins.git.BranchSpec> branches = [
+		new hudson.plugins.git.BranchSpec(PIPELINE_DEFAULT_BRANCH)
 	]
-	dslGeneratorJob.setScm(new GitSCM(GitSCM.createRepoList(PIPELINE_LIB_GIT_URL, ""), branches, false, null, null, null, null))
+	dslGeneratorJob.setScm(new hudson.plugins.git.GitSCM(hudson.plugins.git.GitSCM.createRepoList(PIPELINE_LIB_GIT_URL, ""), branches, false, null, null, null, null))
 
-	ExecuteDslScripts executeDslScripts = new ExecuteDslScripts()
+	javaposse.jobdsl.plugin.ExecuteDslScripts executeDslScripts = new javaposse.jobdsl.plugin.ExecuteDslScripts()
 	executeDslScripts.setTargets("src/mtl/devops/dslGeneratorJobs.groovy")
 	executeDslScripts.setRemovedJobAction(RemovedJobAction.DELETE)
 	executeDslScripts.setRemovedViewAction(RemovedViewAction.DELETE)
@@ -129,13 +125,13 @@ if(dslGeneratorJob == null){
 	dslGeneratorJob.scheduleBuild(0)
 }
 
-def globalConfigFileStore = org.jenkinsci.plugins.configfiles.GlobalConfigFiles.get();
+org.jenkinsci.plugins.configfiles.GlobalConfigFiles globalConfigFileStore = org.jenkinsci.plugins.configfiles.GlobalConfigFiles.get();
 
-def stringWriter = new StringWriter()
+StringWriter stringWriter = new StringWriter()
 def settingsXmlFile = new XmlSlurper().parse(new File(MAVEN_SETTINGS_ABSOLUTE_PATH))
 new XmlNodePrinter(new PrintWriter(stringWriter)).print(settingsXmlFile)
 
-def mavenSettingsConfig = new org.jenkinsci.plugins.configfiles.maven.MavenSettingsConfig("nexus-settings", "nexus-settings", "", stringWriter.toString(), null, null);
+org.jenkinsci.plugins.configfiles.maven.MavenSettingsConfig mavenSettingsConfig = new org.jenkinsci.plugins.configfiles.maven.MavenSettingsConfig("nexus-settings", "nexus-settings", "", stringWriter.toString(), null, null);
 globalConfigFileStore.save(mavenSettingsConfig)
 
 JENKINS.save()
