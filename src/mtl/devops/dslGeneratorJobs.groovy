@@ -13,5 +13,8 @@ for (projet in root.projets) {
 		orphanedItemStrategy {
 			discardOldItems { numToKeep(20) }
 		}
+		triggers { 
+			periodic(1) 
+		}
 	}
 }
