@@ -1,10 +1,18 @@
 import jenkins.model.*
-import hudson.util.*
 import jenkins.install.*
+import javaposse.jobdsl.plugin.ExecuteDslScripts
+import hudson.util.*
 import hudson.model.UpdateSite
+import hudson.model.TopLevelItem
 import hudson.PluginWrapper
 import hudson.PluginManager
 import hudson.security.*
+import hudson.model.labels.LabelAtom
+import hudson.tasks.LogRotator
+import hudson.triggers.SCMTrigger
+import hudson.plugins.git.BranchSpec
+import hudson.plugins.git.extensions.GitSCMExtension
+import hudson.plugins.git.GitSCM
 
 String PIPELINE_LIB_ID = "PIPELIB"
 String PIPELINE_DEFAULT_BRANCH = "master"
