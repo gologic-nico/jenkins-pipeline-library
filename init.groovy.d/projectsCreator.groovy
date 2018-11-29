@@ -9,6 +9,12 @@ import hudson.security.*
 import hudson.model.labels.LabelAtom
 import hudson.tasks.LogRotator
 import hudson.triggers.SCMTrigger
+import javaposse.jobdsl.plugin.GlobalJobDslSecurityConfiguration
+import jenkins.model.GlobalConfiguration
+
+//Désactiver la sécurité DSL
+GlobalConfiguration.all().get(GlobalJobDslSecurityConfiguration.class).useScriptSecurity=false
+GlobalConfiguration.all().get(GlobalJobDslSecurityConfiguration.class).save()
 
 String PIPELINE_LIB_ID = "PIPELIB"
 String PIPELINE_DEFAULT_BRANCH = "master"
