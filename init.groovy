@@ -13,7 +13,11 @@ def pluginsList = ["ace-editor","analysis-core","ant","antisamy-markup-formatter
 String ADMIN_USERNAME = "admin"
 String ADMIN_USERNAMEPASSWORD = "admin"
 
-println "jenkins-pipeline-library : init"
+println "---------------------------------------------------------------"
+println "-"
+println "- Run ${JENINS_HOME}/jenkins-pipeline-library/init.groovy"
+println "-"
+println "---------------------------------------------------------------"
 
 def JENKINS = Jenkins.get()
 
@@ -76,11 +80,9 @@ catch (Exception e)  {
 }
 
 JENKINS.setNumExecutors(10)
-println "setNumExecutors(10)"
-
 JENKINS.setLabelString("master jenkins-pipeline-library")
-println "setLabelString(master jenkins-pipeline-library)"
 
+//Permet de visualiser les rapports HTML robot framework
 System.setProperty("hudson.model.DirectoryBrowserSupport.CSP", "")
 
 JENKINS.save()

@@ -28,7 +28,12 @@
   git:
     repo: https://github.com/gologic-nico/jenkins-pipeline-library.git
     dest: /var/lib/jenkins/jenkins-pipeline-library
-    force: yes
+    force: no
+
+- name: Set execution on init.groovy
+  file:
+    path: /var/lib/jenkins/jenkins-pipeline-library/init.groovy
+    mode: 0777
 
 - name: Create init.groovy link to JENKINS_HOME
   file:
@@ -38,11 +43,6 @@
     group: jenkins
     mode: u+rwx
     state: link
-
-- name: Set execution on init.groovy
-  file:
-    path: /var/lib/jenkins/jenkins-pipeline-library/init.groovy
-    mode: 0777
 
 - name: Restarted Jenkins
   systemd:
@@ -81,5 +81,3 @@
     name: docker
     state: started
 
-- name: Show init password jenkins
-  shell: cat /var/lib/jenkins/secrets/initialAdminPassword
