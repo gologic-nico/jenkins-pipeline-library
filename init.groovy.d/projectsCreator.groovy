@@ -69,6 +69,8 @@ StringWriter stringWriter = new StringWriter()
 def settingsXmlFile = new XmlSlurper().parse(new File(MAVEN_SETTINGS_ABSOLUTE_PATH))
 new XmlNodePrinter(new PrintWriter(stringWriter)).print(settingsXmlFile)
 
+println "Valeur du fichier : " + stringWriter.toString()
+
 org.jenkinsci.plugins.configfiles.maven.MavenSettingsConfig mavenSettingsConfig = new org.jenkinsci.plugins.configfiles.maven.MavenSettingsConfig("nexus-settings", "nexus-settings", "", stringWriter.toString(), null, null);
 globalConfigFileStore.save(mavenSettingsConfig)
 
