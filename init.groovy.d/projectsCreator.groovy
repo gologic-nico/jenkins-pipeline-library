@@ -63,16 +63,5 @@ if(dslGeneratorJob == null){
 	dslGeneratorJob.scheduleBuild(0)
 }
 
-org.jenkinsci.plugins.configfiles.GlobalConfigFiles globalConfigFileStore = org.jenkinsci.plugins.configfiles.GlobalConfigFiles.get();
-
-StringWriter stringWriter = new StringWriter()
-def settingsXmlFile = new XmlSlurper().parse(new File(MAVEN_SETTINGS_ABSOLUTE_PATH))
-new XmlNodePrinter(new PrintWriter(stringWriter)).print(settingsXmlFile)
-
-println "Valeur du fichier : " + stringWriter.toString()
-
-org.jenkinsci.plugins.configfiles.maven.MavenSettingsConfig mavenSettingsConfig = new org.jenkinsci.plugins.configfiles.maven.MavenSettingsConfig("maven-settings", "maven-settings", "", stringWriter.toString(), null, null);
-globalConfigFileStore.save(mavenSettingsConfig)
-
 JENKINS.save()
 
