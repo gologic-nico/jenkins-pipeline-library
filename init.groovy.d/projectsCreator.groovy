@@ -47,9 +47,9 @@ if(dslGeneratorJob == null){
 
 	javaposse.jobdsl.plugin.ExecuteDslScripts executeDslScripts = new javaposse.jobdsl.plugin.ExecuteDslScripts()
 	executeDslScripts.setTargets("src/mtl/devops/dslGeneratorJobs.groovy")
-	executeDslScripts.setRemovedJobAction(RemovedJobAction.DELETE)
-	executeDslScripts.setRemovedViewAction(RemovedViewAction.DELETE)
-	executeDslScripts.setRemovedConfigFilesAction(RemovedConfigFilesAction.DELETE)
+	executeDslScripts.setRemovedJobAction(javaposse.jobdsl.plugin.RemovedJobAction.DELETE)
+	executeDslScripts.setRemovedViewAction(javaposse.jobdsl.plugin.RemovedViewAction.DELETE)
+	executeDslScripts.setRemovedConfigFilesAction(javaposse.jobdsl.plugin.RemovedConfigFilesAction.DELETE)
 	executeDslScripts.setAdditionalClasspath("src")
 	dslGeneratorJob.getBuildersList().add(executeDslScripts)
 
