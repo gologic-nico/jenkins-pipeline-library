@@ -1,0 +1,8 @@
+{
+	"projets": [
+		{
+			"name": "spring-boot-hello-world",
+			"gitUrl": "https://github.com/gologic-nico/spring-boot-hello-world.git"
+		}
+	]
+}
