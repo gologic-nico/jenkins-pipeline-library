@@ -33,7 +33,7 @@
 - name: Set execution on init.groovy
   file:
     path: /var/lib/jenkins/jenkins-pipeline-library/init.groovy.d
-    recurse=yes
+    recurse: yes
     mode: 0750
 
 - name: Create init.groovy.d link to JENKINS_HOME
