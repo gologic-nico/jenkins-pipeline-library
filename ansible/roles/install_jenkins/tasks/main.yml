@@ -32,13 +32,14 @@
 
 - name: Set execution on init.groovy
   file:
-    path: /var/lib/jenkins/jenkins-pipeline-library/init.groovy
-    mode: 0777
+    path: /var/lib/jenkins/jenkins-pipeline-library/init.groovy.d
+    recurse=yes
+    mode: 0750
 
-- name: Create init.groovy link to JENKINS_HOME
+- name: Create init.groovy.d link to JENKINS_HOME
   file:
-    src: /var/lib/jenkins/jenkins-pipeline-library/init.groovy
-    dest: /var/lib/jenkins/init.groovy
+    src: /var/lib/jenkins/jenkins-pipeline-library/init.groovy.d
+    dest: /var/lib/jenkins/init.groovy.d
     owner: jenkins
     group: jenkins
     mode: u+rwx
