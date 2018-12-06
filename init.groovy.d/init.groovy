@@ -42,13 +42,17 @@ for (pluginId in pluginsList) {
 	if (pluginManager.getPlugin(pluginId) == null ) {
 
 		println "--------------- Install start install plugins : ${pluginId}"
-		UpdateSite.Plugin plugin = updateSite.getPlugin(pluginId)
-		Throwable error = plugin.deploy(true).get().getError()
-
-		if(error != null) {
-			println "--------------- ERROR installing ${pluginId} : ${error}"
-		} else{
-			println "--------------- SUCCESSFULLY installed plugin ${pluginId}"
+		try {
+			UpdateSite.Plugin plugin = updateSite.getPlugin(pluginId)
+			Throwable error = plugin.deploy(true).get().getError()
+			
+			if(error != null) {
+				println "--------------- ERROR installing plugin ${pluginId} : ${error}"
+			} else{
+				println "--------------- SUCCESSFULLY installed plugin ${pluginId}"
+			}
+		}catch (Exception e)  {
+			println "--------------- ERROR installing plugin ${pluginId} exception : \n" + e.printStackTrace()
 		}
 	}
 	else{
